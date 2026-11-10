@@ -22,53 +22,91 @@
     <main>
         <section>
             <h2>¿Cuánto aprendiste?</h2>
-
-            <p>
-                La corrección de las respuestas se agregará con JavaScript en la fase 4.
-            </p>
+            <p>Elegí una opción por pregunta y presioná Comprobar respuestas.</p>
 
             <form>
                 <div class="pregunta">
                     <h3>1. ¿Dónde nació Florentín Felipe Naya?</h3>
 
-                    <input type="radio" id="zaragoza" name="pregunta1">
+                    <input type="radio" id="zaragoza" name="pregunta1" value="a">
                     <label for="zaragoza">Zaragoza</label><br>
 
-                    <input type="radio" id="alquezar" name="pregunta1">
+                    <input type="radio" id="alquezar" name="pregunta1" value="b">
                     <label for="alquezar">Alquézar</label><br>
 
-                    <input type="radio" id="azanuy" name="pregunta1">
+                    <input type="radio" id="azanuy" name="pregunta1" value="c">
                     <label for="azanuy">Azanuy</label>
                 </div>
 
                 <div class="pregunta">
                     <h3>2. ¿Cuál fue una de sus tareas principales?</h3>
 
-                    <input type="radio" id="maestro" name="pregunta2">
+                    <input type="radio" id="maestro" name="pregunta2" value="a">
                     <label for="maestro">Maestro</label><br>
 
-                    <input type="radio" id="cocinero" name="pregunta2">
+                    <input type="radio" id="cocinero" name="pregunta2" value="b">
                     <label for="cocinero">Cocinero</label><br>
 
-                    <input type="radio" id="medico" name="pregunta2">
+                    <input type="radio" id="medico" name="pregunta2" value="c">
                     <label for="medico">Médico</label>
                 </div>
 
                 <div class="pregunta">
                     <h3>3. ¿En qué año fue beatificado?</h3>
 
-                    <input type="radio" id="anio1936" name="pregunta3">
+                    <input type="radio" id="anio1936" name="pregunta3" value="a">
                     <label for="anio1936">1936</label><br>
 
-                    <input type="radio" id="anio1980" name="pregunta3">
+                    <input type="radio" id="anio1980" name="pregunta3" value="b">
                     <label for="anio1980">1980</label><br>
 
-                    <input type="radio" id="anio1995" name="pregunta3">
+                    <input type="radio" id="anio1995" name="pregunta3" value="c">
                     <label for="anio1995">1995</label>
                 </div>
 
-                <!-- Este botón se programará en la fase 4 -->
-                <button type="button">Comprobar respuestas</button>
+                <div class="pregunta">
+                    <h3>4. ¿Dónde comenzó su noviciado?</h3>
+
+                    <input type="radio" id="peralta" name="pregunta4" value="a">
+                    <label for="peralta">Peralta de la Sal</label><br>
+
+                    <input type="radio" id="noviciado-pamplona" name="pregunta4" value="b">
+                    <label for="noviciado-pamplona">Pamplona</label><br>
+
+                    <input type="radio" id="noviciado-zaragoza" name="pregunta4" value="c">
+                    <label for="noviciado-zaragoza">Zaragoza</label>
+                </div>
+
+                <div class="pregunta">
+                    <h3>5. Según el relato de su vida, ¿qué rezaba seguido?</h3>
+
+                    <input type="radio" id="padrenuestro" name="pregunta5" value="a">
+                    <label for="padrenuestro">El Padrenuestro</label><br>
+
+                    <input type="radio" id="angelus" name="pregunta5" value="b">
+                    <label for="angelus">El Ángelus</label><br>
+
+                    <input type="radio" id="rosario" name="pregunta5" value="c">
+                    <label for="rosario">El Rosario</label>
+                </div>
+
+                <div class="pregunta">
+                    <h3>6. ¿Qué papa beatificó a Florentín Felipe Naya?</h3>
+
+                    <input type="radio" id="juan-pablo" name="pregunta6" value="a">
+                    <label for="juan-pablo">Juan Pablo II</label><br>
+
+                    <input type="radio" id="benedicto" name="pregunta6" value="b">
+                    <label for="benedicto">Benedicto XVI</label><br>
+
+                    <input type="radio" id="francisco" name="pregunta6" value="c">
+                    <label for="francisco">Francisco</label>
+                </div>
+
+                <button id="comprobar" type="button">Comprobar respuestas</button>
+                <button id="reiniciar" type="button">Reiniciar</button>
+
+                <div id="resultado"></div>
             </form>
         </section>
     </main>
@@ -77,5 +115,54 @@
         <a href="../index.html">Volver al inicio</a>
         <p>Página realizada por Mick Villafuerte y Emanuel Gamarra - 3.º H</p>
     </footer>
+
+    <script>
+        document.getElementById("comprobar").addEventListener("click", function() {
+            let puntaje = 0;
+
+            let p1 = document.querySelector('input[name="pregunta1"]:checked');
+            let p2 = document.querySelector('input[name="pregunta2"]:checked');
+            let p3 = document.querySelector('input[name="pregunta3"]:checked');
+            let p4 = document.querySelector('input[name="pregunta4"]:checked');
+            let p5 = document.querySelector('input[name="pregunta5"]:checked');
+            let p6 = document.querySelector('input[name="pregunta6"]:checked');
+
+            if (!p1 || !p2 || !p3 || !p4 || !p5 || !p6) {
+                document.getElementById("resultado").innerHTML =
+                    "Debes responder las seis preguntas.";
+                return;
+            }
+
+            // Respuestas correctas
+            if (p1.value === "b") puntaje++;
+            if (p2.value === "b") puntaje++;
+            if (p3.value === "c") puntaje++;
+            if (p4.value === "a") puntaje++;
+            if (p5.value === "c") puntaje++;
+            if (p6.value === "a") puntaje++;
+
+            let mensaje = "<h3>Resultado: " + puntaje + "/6 puntos</h3>";
+
+            if (puntaje === 6) {
+                mensaje += "¡Felicitaciones! Has respondido correctamente todas las preguntas.";
+            } else if (puntaje === 5) {
+                mensaje += "Buen intento. Solo te equivocaste en una pregunta.";
+            } else {
+                mensaje += "Te invito a intentarlo nuevamente.";
+            }
+
+            document.getElementById("resultado").innerHTML = mensaje;
+        });
+
+        document.getElementById("reiniciar").addEventListener("click", function() {
+            let opciones = document.querySelectorAll('input[type="radio"]');
+
+            for (let opcion of opciones) {
+                opcion.checked = false;
+            }
+
+            document.getElementById("resultado").innerHTML = "";
+        });
+    </script>
 </body>
 </html>
